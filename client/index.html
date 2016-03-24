@@ -6,6 +6,9 @@
     </head>
     <body>
         <h1>NCPS</h1>
+        <ul ng-controller="membersController as membersCtrl">
+            <li ng-repeat="member in membersCtrl.members">{{member}}</li>
+        </ul>
 
         <script src="dist/bundle.js" charset="utf-8"></script>
     </body>

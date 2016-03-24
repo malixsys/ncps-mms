@@ -7,7 +7,13 @@ var _angular2 = _interopRequireDefault(_angular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('ncps', []); /* jshint esversion: 6 */
+_angular2.default.module('ncps', []).controller('membersController', function ($http) {
+    var _this = this;
+
+    $http.get('/members').then(function (response) {
+        _this.members = response.data;
+    });
+}); /* jshint esversion: 6 */
 
 },{"angular":3}],2:[function(require,module,exports){
 /**
