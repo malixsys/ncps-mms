@@ -2,6 +2,8 @@
 logs
 *.log
 npm-debug.log*
+.swp
+.babelrc
 
 # Runtime data
 pids
@@ -31,3 +33,6 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# Mac Files
+.DS_Store
