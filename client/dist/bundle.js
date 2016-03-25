@@ -5,17 +5,33 @@ var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
 
+require('./controllers');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('ncps', []).controller('membersController', function ($http) {
+/* jshint esversion: 6 */
+
+_angular2.default.module('ncps', ["ncps.controllers"]);
+
+},{"./controllers":2,"angular":4}],2:[function(require,module,exports){
+'use strict';
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_angular2.default.module('ncps.controllers', []).controller('MembersController', function ($http) {
     var _this = this;
 
     $http.get('/members').then(function (response) {
         _this.members = response.data;
     });
 }); /* jshint esversion: 6 */
+/* jshint node: true */
 
-},{"angular":3}],2:[function(require,module,exports){
+},{"angular":4}],3:[function(require,module,exports){
 /**
  * @license AngularJS v1.5.2
  * (c) 2010-2016 Google, Inc. http://angularjs.org
@@ -30596,8 +30612,8 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 require('./angular');
 module.exports = angular;
 
-},{"./angular":2}]},{},[1]);
+},{"./angular":3}]},{},[1]);

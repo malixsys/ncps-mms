@@ -5,30 +5,44 @@
         <title>NCPS Member Management System</title>
 
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+            integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+            crossorigin="anonymous">
 
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+            integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r"
+            crossorigin="anonymous">
 
         <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+            integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+            crossorigin="anonymous"></script> -->
     </head>
     <body>
         <div class="container">
             <h1>NCPS</h1>
 
-            <table class="table table-hover" ng-controller="membersController as membersCtrl">
+            <div class="form-group">
+                <a class="btn btn-default" href="#/members/new">New Member</a>
+                Search: <input type="text" ng-model="search.input" name="name" value="">
+            </div>
+
+            <table class="table table-hover" ng-controller="MembersController as membersCtrl">
                 <thead>
+                    <th>USPSA #</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                 </thead>
-                <tr ng-repeat="member in membersCtrl.members">
+                <tr ng-repeat="member in membersCtrl.members | filter: search.input">
+                    <td>{{member.uspsaMemberNumber}}</td>
                     <td>{{member.name.first}}</td>
                     <td>{{member.name.last}}</td>
                 </tr>
             </table>
         </div>
 
+        <!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" charset="utf-8"></script> -->
         <script src="dist/bundle.js" charset="utf-8"></script>
     </body>
 </html>
