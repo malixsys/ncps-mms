@@ -5,7 +5,7 @@ var _angular = require('angular');
 
 var _angular2 = _interopRequireDefault(_angular);
 
-require('./controllers');
+require('./controllers/controllers');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -13,7 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 _angular2.default.module('ncps', ["ncps.controllers"]);
 
-},{"./controllers":2,"angular":4}],2:[function(require,module,exports){
+},{"./controllers/controllers":2,"angular":4}],2:[function(require,module,exports){
 'use strict';
 
 var _angular = require('angular');
