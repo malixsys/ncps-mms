@@ -19,4 +19,6 @@ var members = require('./routes/member');
 
 app.use('/members', members);
 
-app.listen(8181, () => console.log("listening on 8181"));
+var port = process.env.port || 3000;
+
+app.listen(port, () => console.log("listening on " + port));
