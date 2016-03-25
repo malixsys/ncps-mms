@@ -1,14 +1,33 @@
 <!DOCTYPE html>
-<html ng-app="ncps">
+<html lang="en" ng-app="ncps">
     <head>
         <meta charset="utf-8">
         <title>NCPS Member Management System</title>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
-        <h1>NCPS</h1>
-        <ul ng-controller="membersController as membersCtrl">
-            <li ng-repeat="member in membersCtrl.members">{{member}}</li>
-        </ul>
+        <div class="container">
+            <h1>NCPS</h1>
+
+            <table class="table table-hover" ng-controller="membersController as membersCtrl">
+                <thead>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </thead>
+                <tr ng-repeat="member in membersCtrl.members">
+                    <td>{{member.name.first}}</td>
+                    <td>{{member.name.last}}</td>
+                </tr>
+            </table>
+        </div>
 
         <script src="dist/bundle.js" charset="utf-8"></script>
     </body>
