@@ -1,0 +1,177 @@
+[
+    {
+        "name": {
+            "first": "Chad",
+            "last": "Hollman"
+        },
+        "gender": 1,
+        "dateOfBirth": "12/31/1980",
+        "address": {
+            "street": "4464 Indigo Ln",
+            "city": "Copenhagen",
+            "state": "CA",
+            "zip": 99818
+        },
+        "phoneNumber": {
+            "primary": 9197872213,
+            "secondary": 9091190939
+        },
+        "emailAddress": "hollmanchad@gmail.com",
+        "uspsaMemberNumer": "A88901231",
+        "uspsaExpiration": "12/31/2020",
+        "nraMemberNumber": "89909",
+        "fscMemberNumber": 1190,
+        "ncpsExpiration": "12/31/2020",
+        "ncpsSponsor": 789123,
+        "ncpsStatus": 1,
+        "emergencyContact": {
+            "name": "Julia Andrews",
+            "phoneNumber": 9190922234
+        },
+        "preCorp": true,
+        "rangeOfficerCert": 1,
+        "rangeOfficerStatus": 1,
+        "rangeOfficerExpiration": "12/31/2020",
+        "hasKey": true
+    },
+    {
+        "name": {
+            "first": "Matt",
+            "last": "Sedlak"
+        },
+        "gender": 1,
+        "dateOfBirth": "10/18/1992",
+        "address": {
+            "street": "4365 Shopan Ct",
+            "city": "Fortitude",
+            "state": "GA",
+            "zip": 92318
+        },
+        "phoneNumber": {
+            "primary": 8781267651,
+            "secondary": 8363561784
+        },
+        "emailAddress": "sedlakmatt@gmail.com",
+        "uspsaMemberNumer": "A8832431231",
+        "uspsaExpiration": "12/31/2015",
+        "nraMemberNumber": "324",
+        "fscMemberNumber": 123,
+        "ncpsExpiration": "12/31/2015",
+        "ncpsSponsor": 18778,
+        "ncpsStatus": 0,
+        "emergencyContact": {
+            "name": "Paul Cork",
+            "phoneNumber": 2678187461
+        },
+        "preCorp": false,
+        "rangeOfficerCert": 1,
+        "rangeOfficerStatus": 1,
+        "rangeOfficerExpiration": "12/31/2031",
+        "hasKey": true
+    },
+    {
+        "name": {
+            "first": "Marti",
+            "last": "Sarigul-Omg"
+        },
+        "gender": 1,
+        "dateOfBirth": "3/16/77",
+        "address": {
+            "street": "1818 Foxtrap Dr",
+            "city": "Goldin",
+            "state": "WA",
+            "zip": 82765
+        },
+        "phoneNumber": {
+            "primary": 3875637181,
+            "secondary": 8756287478
+        },
+        "emailAddress": "sarigulmarti@gmail.com",
+        "uspsaMemberNumer": "A934887",
+        "uspsaExpiration": "8/30/2018",
+        "nraMemberNumber": "89995",
+        "fscMemberNumber": 987,
+        "ncpsExpiration": "10/31/2026",
+        "ncpsSponsor": 88767,
+        "ncpsStatus": 1,
+        "emergencyContact": {
+            "name": "Maria Familia",
+            "phoneNumber": 8877665512
+        },
+        "preCorp": false,
+        "rangeOfficerCert": 1,
+        "rangeOfficerStatus": 3,
+        "rangeOfficerExpiration": "12/18/2016",
+        "hasKey": true
+    },
+    {
+        "name": {
+            "first": "Chris",
+            "last": "Buendia"
+        },
+        "gender": 1,
+        "dateOfBirth": "12/16/1999",
+        "address": {
+            "street": "9090 Cisco Dr",
+            "city": "Rocklin",
+            "state": "CA",
+            "zip": 76789
+        },
+        "phoneNumber": {
+            "primary": 8887878675,
+            "secondary": 4656782453
+        },
+        "emailAddress": "buendiachris@gmail.com",
+        "uspsaMemberNumer": "A887461",
+        "uspsaExpiration": "8/31/2015",
+        "nraMemberNumber": "878789",
+        "fscMemberNumber": 12345,
+        "ncpsExpiration": "12/31/2020",
+        "ncpsSponsor": 889909,
+        "ncpsStatus": 1,
+        "emergencyContact": {
+            "name": "Alena Morriset",
+            "phoneNumber": 6776891234
+        },
+        "preCorp": true,
+        "rangeOfficerCert": 2,
+        "rangeOfficerStatus": 0,
+        "rangeOfficerExpiration": "1/31/2032",
+        "hasKey": false
+    },
+    {
+        "name": {
+            "first": "Lawrence",
+            "last": "Northrop"
+        },
+        "gender": 1,
+        "dateOfBirth": "6/18/1982",
+        "address": {
+            "street": "6765 Corntail St",
+            "city": "Winterfrost",
+            "state": "OK",
+            "zip": 78674
+        },
+        "phoneNumber": {
+            "primary": 1876356155,
+            "secondary": 8743635182
+        },
+        "emailAddress": "northroplawrence@gmail.com",
+        "uspsaMemberNumer": "A999481",
+        "uspsaExpiration": "12/31/2018",
+        "nraMemberNumber": "123548348",
+        "fscMemberNumber": 4848884,
+        "ncpsExpiration": "12/31/2017",
+        "ncpsSponsor": 234878,
+        "ncpsStatus": 1,
+        "emergencyContact": {
+            "name": "Amber McCuley",
+            "phoneNumber": 5778819283
+        },
+        "preCorp": false,
+        "rangeOfficerCert": 3,
+        "rangeOfficerStatus": 0,
+        "rangeOfficerExpiration": "12/31/2028",
+        "hasKey": false
+    }
+]
