@@ -4,7 +4,7 @@
   "description": "NCPS Member Management System",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node test.js",
     "watch": "gulp watch --gulpfile client/gulpfile.babel.js",
     "start": "node server/app.js"
   },
@@ -31,6 +31,8 @@
     "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "gulp": "^3.9.1",
+    "mocha": "^2.4.5",
+    "supertest": "^1.2.0",
     "vinyl-source-stream": "^1.1.0"
   }
 }
