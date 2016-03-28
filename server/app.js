@@ -7,7 +7,14 @@ let app = express();
 
 app.use(express.static(__dirname + "/../client"));
 
-mongoose.connect('mongodb://localhost/ncps');
+mongoose.connect('mongodb://localhost/ncps', (err) => {
+    if (err) {
+        console.log('Error connecting to Mongo - make sure mongo is running...');
+        process.exit(1);
+    }
+
+    console.log('Connected to Mongo');
+});
 
 require('./models/member');
 

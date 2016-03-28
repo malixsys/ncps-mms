@@ -24,22 +24,11 @@
             <h1>NCPS</h1>
 
             <div class="form-group">
-                <a class="btn btn-default" href="#/members/new">New Member</a>
+                <a class="btn btn-default" ui-sref="members.new">New Member</a>
                 Search: <input type="text" ng-model="search.input" name="name" value="">
             </div>
 
-            <table class="table table-hover" ng-controller="MembersController as membersCtrl">
-                <thead>
-                    <th>USPSA #</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                </thead>
-                <tr ng-repeat="member in membersCtrl.members | filter: search.input">
-                    <td>{{member.uspsaMemberNumber}}</td>
-                    <td>{{member.name.first}}</td>
-                    <td>{{member.name.last}}</td>
-                </tr>
-            </table>
+            <div class="ui-view"></div>
         </div>
 
         <!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" charset="utf-8"></script> -->
