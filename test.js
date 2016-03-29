@@ -1,7 +1,7 @@
 /* jshint esversion: 6 */
 /* jshint node: true */
 /* jshint mocha: true */
-"use strict";
+//"use strict";
 var request = require('supertest');
 var app = require('./server/app');
 

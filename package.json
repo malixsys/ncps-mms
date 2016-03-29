@@ -4,7 +4,7 @@
   "description": "NCPS Member Management System",
   "main": "index.js",
   "scripts": {
-    "test": "mocha test.js",
+    "test": "NODE_ENV=test mocha test.js",
     "watch": "gulp watch --gulpfile client/gulpfile.babel.js",
     "start": "node server/app.js"
   },
@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/gh0st/ncps-mms.git"
   },
-  "author": "Chad Hollman",
+  "author": "Chad Hollman <hollmanchad@gmail.com> (https://github.com/gh0st)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/gh0st/ncps-mms/issues"
