@@ -4,6 +4,7 @@ logs
 npm-debug.log*
 .swp
 .babelrc
+.htmlhintrc
 
 # Runtime data
 pids
