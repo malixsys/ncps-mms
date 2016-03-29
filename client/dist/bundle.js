@@ -29,6 +29,15 @@ _angular2.default.module('ncps.controllers', []).controller('MembersController',
     $http.get('/members').then(function (response) {
         _this.members = response.data;
     });
+}).controller('MembersSaveController', function ($stateParams, $state, $http) {
+    this.member = $state.member;
+
+    this.saveMember = function (member) {
+        $http.post('/members', member).then(function (res, member) {
+            console.log(member);
+            $state.go('members');
+        });
+    };
 }); /* jshint esversion: 6 */
 /* jshint node: true */
 
@@ -59,12 +68,13 @@ _angular2.default.module('ncps.routes', ['ui.router']).config(function ($statePr
             }
         },
         controller: 'MembersController as membersCtrl'
-    }).state('members.new', {
-        url: '/new',
-        template: 'I could use a drink right now.'
-    }).state('members.test', {
-        url: '/test',
-        template: 'I could use a drink right now.'
+    }).state('new', {
+        url: '/members/add',
+        templateUrl: '/members/members-add.html',
+        controller: 'MembersSaveController as newMemberCtrl'
+    }).state('test', {
+        url: '/members/test',
+        template: 'This is a test.'
     });
 });
 

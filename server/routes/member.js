@@ -1,40 +1,42 @@
+/* jshint esversion: 2015 */
 var express = require('express');
-var router = express.Router();
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
+var router = express.Router();
+
+var app = express();
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.json());
 
 var Member = mongoose.model('Member');
 
+// all of these routes are prefixed by /member/
+
 router.route('/')
-    .get(function(req, res, next) {
+    .get(function(req, res) {
         Member.find(function(err, member) {
             if (err) return next(err);
+
+            res.json(member);
+        });
+    })
+    .post(function(req, res) {
+        var member = new Member(req.body);
+
+        member.save((err, member) => {
+            if (err) res.send(err);
 
             res.json(member);
         });
     });
 
 router.route('/:id')
-    .get(function(req, res, next) {
+    .get(function(req, res) {
         Member.find({'_id': req.params.id}, function(err, member) {
             if (err) return next(err);
 
             res.json(member);
         });
-    });
-
-router.route('/new')
-    .post(function(req, res, next) {
-        setTimeout(function() {
-            var member = new Member({
-                'name.first': req.params.firstName,
-                'name.last': req.params.lastName,
-                'emailAddress': req.params.emailAddress
-            });
-
-            member.save(function(err) {
-                if (err) return next(err);
-            });
-        }, 1000);
     });
 
 module.exports = router;

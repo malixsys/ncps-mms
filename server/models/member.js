@@ -18,7 +18,7 @@ var MemberSchema = new mongoose.Schema({
         secondary: Number
     },
     emailAddress: {type: String, lowercase: true, unique: true},
-    uspsaMemberNumer: String,
+    uspsaMemberNumber: String,
     uspsaExpiration: Date,
     nraMemberNumber: Number,
     nraExpiration: Date,

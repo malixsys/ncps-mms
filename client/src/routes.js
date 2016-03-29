@@ -3,7 +3,8 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-angular.module('ncps.routes', ['ui.router']).config(($stateProvider, $urlRouterProvider) => {
+angular.module('ncps.routes', ['ui.router'])
+.config(($stateProvider, $urlRouterProvider) => {
     $urlRouterProvider.otherwise('/members');
 
     $stateProvider
@@ -17,13 +18,13 @@ angular.module('ncps.routes', ['ui.router']).config(($stateProvider, $urlRouterP
         },
         controller: 'MembersController as membersCtrl'
     })
-    .state('members.new', {
-        url: '/new',
-        template: 'I could use a drink right now.'
+    .state('new', {
+        url: '/members/add',
+        templateUrl: '/members/members-add.html',
+        controller: 'MembersSaveController as newMemberCtrl'
     })
-    .state('members.test', {
-        url: '/test',
-        template: 'I could use a drink right now.'
-    })
-    ;
+    .state('test', {
+        url: '/members/test',
+        template: 'This is a test.'
+    });
 });

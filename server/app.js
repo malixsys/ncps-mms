@@ -3,9 +3,12 @@
 "use strict";
 let express = require('express');
 let mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 let app = express();
 
 app.use(express.static(__dirname + "/../client"));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 mongoose.connect('mongodb://localhost/ncps', (err) => {
     if (err) {
