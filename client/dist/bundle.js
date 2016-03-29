@@ -61,14 +61,10 @@ _angular2.default.module('ncps.routes', ['ui.router']).config(function ($statePr
         controller: 'MembersController as membersCtrl'
     }).state('members.new', {
         url: '/new',
-        templateUrl: 'members/members-add.html',
-        resolve: {
-            membersService: function membersService($http) {
-                return $http.get('/members/' + stateParams.memberId);
-            }
-        },
-        controller: 'MembersController as membersCtrl'
-        // controllerAs: 'memberCtrl'
+        template: 'I could use a drink right now.'
+    }).state('members.test', {
+        url: '/test',
+        template: 'I could use a drink right now.'
     });
 });
 

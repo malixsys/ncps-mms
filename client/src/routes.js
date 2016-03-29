@@ -3,8 +3,7 @@
 import angular from 'angular';
 import 'angular-ui-router';
 
-angular.module('ncps.routes', ['ui.router'])
-.config(($stateProvider, $urlRouterProvider) => {
+angular.module('ncps.routes', ['ui.router']).config(($stateProvider, $urlRouterProvider) => {
     $urlRouterProvider.otherwise('/members');
 
     $stateProvider
@@ -20,13 +19,11 @@ angular.module('ncps.routes', ['ui.router'])
     })
     .state('members.new', {
         url: '/new',
-        templateUrl: 'members/members-add.html',
-        resolve: {
-            membersService: function($http) {
-                return $http.get(`/members/${stateParams.memberId}`);
-            }
-        },
-        controller: 'MembersController as membersCtrl'
-        // controllerAs: 'memberCtrl'
-    });
+        template: 'I could use a drink right now.'
+    })
+    .state('members.test', {
+        url: '/test',
+        template: 'I could use a drink right now.'
+    })
+    ;
 });
