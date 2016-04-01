@@ -1,5 +1,3 @@
-/* jshint esversion: 6 */
-/* jshint node: true */
 "use strict";
 let express = require('express');
 let mongoose = require('mongoose');
@@ -31,6 +29,8 @@ app.use('/members', members);
 
 var port = process.env.port || 3000;
 
-app.listen(port, () => console.log("listening on " + port));
+app.listen(port, () => {
+    console.log("Listening on port " + port);
+});
 
 module.exports = app;
