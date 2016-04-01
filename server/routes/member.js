@@ -1,4 +1,3 @@
-/* jshint esversion: 2015 */
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
@@ -14,7 +13,7 @@ var Member = mongoose.model('Member');
 
 router.route('/')
     .get(function(req, res) {
-        Member.find(function(err, member) {
+        Member.find((err, member) => {
             if (err) return next(err);
 
             res.json(member);
@@ -31,11 +30,34 @@ router.route('/')
     });
 
 router.route('/:id')
-    .get(function(req, res) {
-        Member.find({'_id': req.params.id}, function(err, member) {
-            if (err) return next(err);
+    .delete((req, res) => {
+        Member.remove({'_id': req.params.id}, (err, member) => {
+            if (err) res.send(err);
+
+            res.json({message: 'Successfully deleted member.'});
+        });
+    })
+    .get((req, res) => {
+        Member.find({'_id': req.params.id}, (err, member) => {
+            if (err) res.send(err);
 
             res.json(member);
+        });
+    })
+    .put((req, res) => {
+        Member.findById(req.params.id, (err, member) => {
+            if (err) res.send(err);
+
+            member = req.body;
+
+            member.save((err) => {
+                if (err) {
+                    console.log('Could not save changes.');
+                    res.send(err);
+                }
+
+                res.json({member});
+            });
         });
     });
 
