@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test mocha test.js",
     "watch": "gulp watch --gulpfile client/gulpfile.babel.js",
-    "start": "node server/app.js"
+    "start": "nodemon server/app.js"
   },
   "repository": {
     "type": "git",
