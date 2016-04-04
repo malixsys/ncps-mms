@@ -4,7 +4,7 @@
   "description": "NCPS Member Management System",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test mocha test.js",
+    "test": "mocha test.js",
     "watch": "gulp watch --gulpfile client/gulpfile.babel.js",
     "start": "nodemon server/app.js"
   },
