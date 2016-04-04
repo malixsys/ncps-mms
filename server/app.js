@@ -1,12 +1,16 @@
 "use strict";
 let express = require('express');
 let mongoose = require('mongoose');
-var bodyParser = require('body-parser');
+let bodyParser = require('body-parser');
 let app = express();
+let jwt = require('jsonwebtoken');
+var config = require('./config');
+var passport = require('passport');
 
 app.use(express.static(__dirname + "/../client"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
 mongoose.connect('mongodb://localhost/ncps', (err) => {
     if (err) {
@@ -18,16 +22,16 @@ mongoose.connect('mongodb://localhost/ncps', (err) => {
 });
 
 require('./models/member');
+require('./models/user');
+
+require('./config/passport');
 
 var members = require('./routes/member');
 
-// app.get("/members", (request, response) => {
-//     response.json(["Chad", "Lawrence", "Matt"]);
-// });
-
 app.use('/members', members);
 
-var port = process.env.port || 3000;
+//var port = process.env.port || 3030;
+var port = 3030;
 
 app.listen(port, () => {
     console.log("Listening on port " + port);

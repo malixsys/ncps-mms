@@ -23,22 +23,96 @@ var _angular2 = _interopRequireDefault(_angular);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('ncps.controllers', []).controller('MembersController', function ($http) {
+_angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$window', function ($http, $window) {
+    var auth = {};
+
+    auth.saveToken = function (token) {
+        $window.localStorage['ncps-token'] = token;
+    };
+
+    auth.getToken = function () {
+        return $window.localStorage['ncps-token'];
+    };
+
+    auth.isLoggedIn = function () {
+        var token = auth.getToken();
+
+        if (token) {
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+            return payload.exp > Date.now() / 1000;
+        } else {
+            return false;
+        }
+    };
+
+    auth.currentUser = function () {
+        if (auth.isLoggedIn()) {
+            var token = auth.getToken();
+        }
+    };
+
+    auth.register = function (user) {
+        return $http.post('/members/setup', user).success(function (data) {
+            auth.saveToken(data.token);
+        });
+    };
+
+    auth.logIn = function (user) {
+        return $http.post('/members/auth', user).success(function (data) {
+            auth.saveToken(data.token);
+        });
+    };
+
+    auth.logOut = function () {
+        $window.localStorage.removeItem('ncps-token');
+    };
+
+    return auth;
+}]).controller('MembersController', ['$http', 'auth', function ($http, auth) {
     var _this = this;
 
     $http.get('/members').then(function (response) {
         _this.members = response.data;
     });
-}).controller('MembersSaveController', function ($stateParams, $state, $http) {
+}]).controller('MembersSaveController', function ($stateParams, $state, $http) {
     this.member = $state.member;
 
     this.saveMember = function (member) {
         $http.post('/members', member).then(function (res, member) {
-            console.log(member);
             $state.go('members');
         });
     };
-}); /* jshint esversion: 6 */
+}).controller('NavController', ['$scope', 'auth', function ($scope, auth) {
+    $scope.isLoggedIn = auth.isLoggedIn;
+    $scope.currentUser = auth.currentUser;
+    $scope.logOut = auth.logOut;
+}]).controller('AuthController', ['$scope', '$state', 'auth', function ($scope, $state, auth) {
+    $scope.user = {};
+
+    $scope.register = function () {
+        auth.register($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('members');
+        });
+    };
+
+    $scope.logIn = function () {
+        auth.logIn($scope.user).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('members');
+        });
+    };
+
+    $scope.logOut = function () {
+        auth.logOut().error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('members');
+        });
+    };
+}]); /* jshint esversion: 6 */
 /* jshint node: true */
 
 },{"angular":6}],3:[function(require,module,exports){
@@ -59,7 +133,25 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _angular2.default.module('ncps.routes', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/members');
 
-    $stateProvider.state('members', {
+    $stateProvider.state('login', {
+        url: '/members/login',
+        templateUrl: 'members/members-login.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('members');
+            }
+        }]
+    }).state('register', {
+        url: '/members/register',
+        templateUrl: 'members/members-register.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function ($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('members');
+            }
+        }]
+    }).state('members', {
         url: '/members',
         templateUrl: 'members/members-view.html',
         resolve: {

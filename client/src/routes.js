@@ -8,6 +8,26 @@ angular.module('ncps.routes', ['ui.router'])
     $urlRouterProvider.otherwise('/members');
 
     $stateProvider
+    .state('login', {
+        url: '/members/login',
+        templateUrl: 'members/members-login.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('members');
+            }
+        }]
+    })
+    .state('register', {
+        url: '/members/register',
+        templateUrl: 'members/members-register.html',
+        controller: 'AuthController',
+        onEnter: ['$state', 'auth', function($state, auth) {
+            if (auth.isLoggedIn()) {
+                $state.go('members');
+            }
+        }]
+    })
     .state('members', {
         url: '/members',
         templateUrl: 'members/members-view.html',
