@@ -85,8 +85,7 @@ angular.module('ncps.controllers', [])
         auth.logIn($scope.user).error(function(error) {
             $scope.error = error;
         }).then(function() {
-            //$state.go('members');
-            $scope.error = "logged in!";
+            $state.go('members');
         });
     };
 

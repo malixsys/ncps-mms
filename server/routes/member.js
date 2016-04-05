@@ -51,7 +51,7 @@ router.route('/auth')
                 return res.json({ token: user.generateJWT() });
             else
                 return res.status(401).json(info);
-        });
+        })(req, res, next);
     });
 
 router.route('/', auth)

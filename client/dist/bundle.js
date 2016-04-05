@@ -101,8 +101,7 @@ _angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$win
         auth.logIn($scope.user).error(function (error) {
             $scope.error = error;
         }).then(function () {
-            //$state.go('members');
-            $scope.error = "logged in!";
+            $state.go('members');
         });
     };
 
