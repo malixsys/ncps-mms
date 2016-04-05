@@ -54,8 +54,8 @@ router.route('/auth')
         })(req, res, next);
     });
 
-router.route('/', auth)
-    .get((req, res) => {
+router.route('/')
+    .get(auth, (req, res) => {
         Member.find((err, member) => {
             if (err) return next(err);
 
