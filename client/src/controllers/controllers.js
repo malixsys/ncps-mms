@@ -27,6 +27,9 @@ angular.module('ncps.controllers', [])
     auth.currentUser = function() {
         if (auth.isLoggedIn()) {
             var token = auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload.username;
         }
     };
 
@@ -48,8 +51,11 @@ angular.module('ncps.controllers', [])
 
     return auth;
 }])
+
 .controller('MembersController', ['$http', 'auth', function($http, auth) {
-    $http.get('/members').then((response) => {
+    $http.get('/members', {
+        headers: { Authorization: 'Bearer ' + auth.getToken() }
+    }).then((response) => {
         this.members = response.data;
     });
 }])

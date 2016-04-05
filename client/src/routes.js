@@ -5,7 +5,7 @@ import 'angular-ui-router';
 
 angular.module('ncps.routes', ['ui.router'])
 .config(($stateProvider, $urlRouterProvider) => {
-    $urlRouterProvider.otherwise('/members');
+    $urlRouterProvider.otherwise('/members/login');
 
     $stateProvider
     .state('login', {

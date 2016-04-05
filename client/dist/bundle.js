@@ -48,6 +48,9 @@ _angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$win
     auth.currentUser = function () {
         if (auth.isLoggedIn()) {
             var token = auth.getToken();
+            var payload = JSON.parse($window.atob(token.split('.')[1]));
+
+            return payload.username;
         }
     };
 
@@ -71,7 +74,9 @@ _angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$win
 }]).controller('MembersController', ['$http', 'auth', function ($http, auth) {
     var _this = this;
 
-    $http.get('/members').then(function (response) {
+    $http.get('/members', {
+        headers: { Authorization: 'Bearer ' + auth.getToken() }
+    }).then(function (response) {
         _this.members = response.data;
     });
 }]).controller('MembersSaveController', function ($stateParams, $state, $http) {
@@ -131,7 +136,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 
 _angular2.default.module('ncps.routes', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise('/members');
+    $urlRouterProvider.otherwise('/members/login');
 
     $stateProvider.state('login', {
         url: '/members/login',
