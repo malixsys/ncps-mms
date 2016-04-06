@@ -11,7 +11,25 @@ require('./routes');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_angular2.default.module('ncps', ["ncps.routes", "ncps.controllers"]); /* jshint esversion: 6 */
+_angular2.default.module('ncps', ["ncps.routes", "ncps.controllers"]).factory('AuthInterceptor', function ($rootScope, $q, $window) {
+    return {
+        request: function request(config) {
+            config.headers = config.headers || {};
+            if ($window.sessionStorage.token) {
+                config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+            }
+            return config;
+        },
+        response: function response(_response) {
+            if (_response.status === 401) {
+                // handle the case where the user is not authenticated
+            }
+            return _response || $q.when(_response);
+        }
+    };
+}).config(function ($httpProvider) {
+    $httpProvider.interceptors.push('AuthInterceptor');
+}); /* jshint esversion: 6 */
 /* jshint node: true */
 
 },{"./controllers/controllers":2,"./routes":3,"angular":6}],2:[function(require,module,exports){
