@@ -55,7 +55,7 @@ router.route('/auth')
     });
 
 router.route('/')
-    .get(auth, (req, res) => {
+    .get((req, res) => {
         Member.find((err, member) => {
             if (err) return next(err);
 
@@ -73,21 +73,21 @@ router.route('/')
     });
 
 router.route('/:id')
-    .delete(auth, (req, res) => {
+    .delete((req, res) => {
         Member.remove({'_id': req.params.id}, (err, member) => {
             if (err) res.send(err);
 
             res.json({message: 'Successfully deleted member.'});
         });
     })
-    .get(auth, (req, res) => {
+    .get((req, res) => {
         Member.find({'_id': req.params.id}, (err, member) => {
             if (err) res.send(err);
 
             res.json(member);
         });
     })
-    .put(auth, (req, res) => {
+    .put((req, res) => {
         Member.findById(req.params.id, (err, member) => {
             if (err) res.send(err);
 
