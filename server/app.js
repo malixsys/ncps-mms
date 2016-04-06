@@ -33,8 +33,10 @@ app.use('/members', members);
 //var port = process.env.port || 3030;
 var port = 3030;
 
-app.listen(port, () => {
-    console.log("Listening on port " + port);
-});
+if (!module.parent) {
+    app.listen(port, () => {
+        console.log("Listening on port " + port);
+    });
+}
 
 module.exports = app;

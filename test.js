@@ -8,9 +8,9 @@ describe('Requests to the root path', function() {
             .expect(200, done);
     });
 
-    // it('Returns a HTML format', function(done) {
-    //     request(app)
-    //         .get('/')
-    //         .expect('Content-Type', 'text/html; charset=utf-8', done);
-    // });
+    it('Returns a HTML format', function(done) {
+        request(app)
+            .get('/')
+            .expect('Content-Type', 'text/html; charset=UTF-8', done);
+    });
 });
