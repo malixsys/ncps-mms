@@ -27,7 +27,6 @@ require('./config/passport');
 
 var members = require('./routes/member');
 
-app.use('/members', expressJwt({ secret: config.secret }));
 app.use('/members', members);
 
 var port = process.env.port || 3030;
