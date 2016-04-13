@@ -32,8 +32,6 @@ router.route('/setup')
             if (err) return res.status(500).json({ message: 'Could not save user.' });
 
             return res.json({
-                success: true,
-                message: 'Enjoy your new passport token!',
                 token: user.generateJWT()
             });
         });
@@ -44,18 +42,21 @@ router.route('/auth')
         if (!req.body.username || !req.body.password)
             return res.status(400).json({ message: 'Please fill out all fields.' });
 
+        console.log('entering passport.authenticate');
         passport.authenticate('local', (err, user, info) => {
             if (err) return next(err);
-
-            if (user)
+            console.log('user is ' + user.username);
+            if (user) {
+                console.log('token: ' + user.generateJWT());
                 return res.json({ token: user.generateJWT() });
-            else
+            } else
                 return res.status(401).json(info);
         })(req, res, next);
     });
 
 router.route('/')
     .get(auth, (req, res) => {
+        console.log('Inside member.js routes...');
         Member.find((err, member) => {
             if (err) return next(err);
 

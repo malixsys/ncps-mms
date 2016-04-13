@@ -14,7 +14,12 @@ angular.module('ncps.routes', ['ui.router'])
         controller: 'AuthController',
         onEnter: ['$state', 'auth', function($state, auth) {
             if (auth.isLoggedIn()) {
-                $state.go('members');
+                console.log('Going to /members/...');
+                $state.go('members', {
+                    // 'headers': {
+                    //     'Authorization': 'Bearer ' + auth.getToken()
+                    // }
+                });
             }
         }]
     })
@@ -33,7 +38,12 @@ angular.module('ncps.routes', ['ui.router'])
         templateUrl: 'members/members-view.html',
         resolve: {
             membersService: function($http) {
-                return $http.get('/members');
+                console.log('Trying to get /members....');
+                return $http.get('/members', {
+                    headers: {
+                        'Authorization': 'Bearer ' + auth.getToken()
+                    }
+                });
             }
         },
         controller: 'MembersController as membersCtrl'

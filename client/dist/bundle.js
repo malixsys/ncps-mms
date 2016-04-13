@@ -27,25 +27,13 @@ _angular2.default.module('ncps', ["ncps.routes", "ncps.controllers"]).factory('A
             return _response || $q.when(_response);
         }
     };
-}).config(function ($httpProvider) {
-    $httpProvider.interceptors.push('AuthInterceptor');
-}); /* jshint esversion: 6 */
-/* jshint node: true */
-
-},{"./controllers/controllers":2,"./routes":3,"angular":6}],2:[function(require,module,exports){
-'use strict';
-
-var _angular = require('angular');
-
-var _angular2 = _interopRequireDefault(_angular);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-_angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$window', function ($http, $window) {
+}).factory('auth', ['$http', '$window', function ($http, $window) {
     var auth = {};
 
     auth.saveToken = function (token) {
+        //console.log('token is: ' + token);
         $window.localStorage['ncps-token'] = token;
+        console.log('inside auth.saveToken and token is: ' + $window.localStorage['ncps-token']);
     };
 
     auth.getToken = function () {
@@ -80,6 +68,7 @@ _angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$win
 
     auth.logIn = function (user) {
         return $http.post('/members/auth', user).success(function (data) {
+            console.log('inside auth factory, token is: ' + data.token);
             auth.saveToken(data.token);
         });
     };
@@ -89,13 +78,28 @@ _angular2.default.module('ncps.controllers', []).factory('auth', ['$http', '$win
     };
 
     return auth;
-}]).controller('MembersController', ['$http', 'auth', function ($http, auth) {
+}]); /* jshint esversion: 6 */
+/* jshint node: true */
+
+},{"./controllers/controllers":2,"./routes":3,"angular":6}],2:[function(require,module,exports){
+'use strict';
+
+var _angular = require('angular');
+
+var _angular2 = _interopRequireDefault(_angular);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+_angular2.default.module('ncps.controllers', []).controller('MembersController', ['$http', 'auth', function ($http, auth) {
     var _this = this;
 
+    console.log('Sending get request to /members...');
     $http.get('/members', {
-        headers: { Authorization: 'Bearer ' + auth.getToken() }
-    }).then(function (response) {
-        _this.members = response.data;
+        headers: {
+            'Authorization': 'Bearer ' + auth.getToken()
+        }
+    }).then(function (res) {
+        _this.members = res.data;
     });
 }]).controller('MembersSaveController', function ($stateParams, $state, $http) {
     this.member = $state.member;
@@ -162,7 +166,12 @@ _angular2.default.module('ncps.routes', ['ui.router']).config(function ($statePr
         controller: 'AuthController',
         onEnter: ['$state', 'auth', function ($state, auth) {
             if (auth.isLoggedIn()) {
-                $state.go('members');
+                console.log('Going to /members/...');
+                $state.go('members', {
+                    // 'headers': {
+                    //     'Authorization': 'Bearer ' + auth.getToken()
+                    // }
+                });
             }
         }]
     }).state('register', {
@@ -179,7 +188,12 @@ _angular2.default.module('ncps.routes', ['ui.router']).config(function ($statePr
         templateUrl: 'members/members-view.html',
         resolve: {
             membersService: function membersService($http) {
-                return $http.get('/members');
+                console.log('Trying to get /members....');
+                return $http.get('/members', {
+                    headers: {
+                        'Authorization': 'Bearer ' + auth.getToken()
+                    }
+                });
             }
         },
         controller: 'MembersController as membersCtrl'

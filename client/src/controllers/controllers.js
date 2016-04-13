@@ -2,61 +2,15 @@
 /* jshint node: true */
 import angular from 'angular';
 angular.module('ncps.controllers', [])
-.factory('auth', ['$http', '$window', function($http, $window) {
-    var auth = {};
-
-    auth.saveToken = function(token) {
-        $window.localStorage['ncps-token'] = token;
-    };
-
-    auth.getToken = function() {
-        return $window.localStorage['ncps-token'];
-    };
-
-    auth.isLoggedIn = function() {
-        var token = auth.getToken();
-
-        if (token) {
-            var payload = JSON.parse($window.atob(token.split('.')[1]));
-            return payload.exp > Date.now() / 1000;
-        } else {
-            return false;
-        }
-    };
-
-    auth.currentUser = function() {
-        if (auth.isLoggedIn()) {
-            var token = auth.getToken();
-            var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-            return payload.username;
-        }
-    };
-
-    auth.register = function(user) {
-        return $http.post('/members/setup', user).success((data)=> {
-            auth.saveToken(data.token);
-        });
-    };
-
-    auth.logIn = function(user) {
-        return $http.post('/members/auth', user).success((data) => {
-            auth.saveToken(data.token);
-        });
-    };
-
-    auth.logOut = function() {
-        $window.localStorage.removeItem('ncps-token');
-    };
-
-    return auth;
-}])
 
 .controller('MembersController', ['$http', 'auth', function($http, auth) {
+    console.log('Sending get request to /members...');
     $http.get('/members', {
-        headers: { Authorization: 'Bearer ' + auth.getToken() }
-    }).then((response) => {
-        this.members = response.data;
+        headers: {
+            'Authorization': 'Bearer ' + auth.getToken()
+        }
+    }).then((res) => {
+        this.members = res.data;
     });
 }])
 
