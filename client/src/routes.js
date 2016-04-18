@@ -37,12 +37,14 @@ angular.module('ncps.routes', ['ui.router'])
         url: '/members',
         templateUrl: 'members/members-view.html',
         resolve: {
-            membersService: function($http) {
+            members: function($http, auth) {
                 console.log('Trying to get /members....');
                 return $http.get('/members', {
                     headers: {
                         'Authorization': 'Bearer ' + auth.getToken()
                     }
+                }).then(function(response){
+                    return response.data;
                 });
             }
         },

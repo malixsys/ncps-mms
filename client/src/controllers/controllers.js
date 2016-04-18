@@ -3,15 +3,9 @@
 import angular from 'angular';
 angular.module('ncps.controllers', [])
 
-.controller('MembersController', ['$http', 'auth', function($http, auth) {
-    console.log('Sending get request to /members...');
-    $http.get('/members', {
-        headers: {
-            'Authorization': 'Bearer ' + auth.getToken()
-        }
-    }).then((res) => {
-        this.members = res.data;
-    });
+.controller('MembersController', ['$http', 'auth', 'members', function($http, auth, members) {
+    console.log('Members retrieved');
+    this.members = members;
 }])
 
 .controller('MembersSaveController', function($stateParams, $state, $http) {

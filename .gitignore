@@ -1,9 +1,11 @@
+client.dist/
+client.dist
+
 # Logs
 logs
 *.log
 npm-debug.log*
 .swp
-.babelrc
 .htmlhintrc
 .jshintrc
 
